@@ -21,6 +21,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             _context = context;
         }
         // GET: api/Values
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {
