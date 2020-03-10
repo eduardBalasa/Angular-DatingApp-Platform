@@ -13,6 +13,7 @@ namespace AplicatieVanzariMasini_Back.Helpers
             response.Headers.Add("Application-Error", message);
             response.Headers.Add("Application-Control-Expose-Headers", "Applcation-Error");
             response.Headers.Add("Application-Control-Allow-Origin", "*");
+            //
         }
     }
 }
