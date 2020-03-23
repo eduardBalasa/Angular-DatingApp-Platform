@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AplicatieVanzariMasini_Back.Data;
 using AplicatieVanzariMasini_Back.Helpers;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -37,7 +38,9 @@ namespace AplicatieVanzariMasini_Back
             services.AddControllers();
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddCors();
+            services.AddAutoMapper(typeof(DatingRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IDatingRepository, DatingRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {

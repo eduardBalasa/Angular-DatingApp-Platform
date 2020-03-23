@@ -15,5 +15,13 @@ namespace AplicatieVanzariMasini_Back.Helpers
             response.Headers.Add("Application-Control-Allow-Origin", "*");
             //
         }
+        public static int CalculatorAge(this DateTime theDateTime)
+        {
+            var age = DateTime.Today.Year - theDateTime.Year;
+            if (theDateTime.AddYears(age) > DateTime.Today)
+                age--;
+
+            return age;
+        }
     }
 }

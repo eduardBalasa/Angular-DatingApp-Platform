@@ -4,14 +4,16 @@ using AplicatieVanzariMasini_Back.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AplicatieVanzariMasini_Back.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200317223804_ExtendedUserClass1")]
+    partial class ExtendedUserClass1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,7 +40,7 @@ namespace AplicatieVanzariMasini_Back.Migrations
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -116,11 +118,9 @@ namespace AplicatieVanzariMasini_Back.Migrations
 
             modelBuilder.Entity("AplicatieVanzariMasini_Back.Models.Photo", b =>
                 {
-                    b.HasOne("AplicatieVanzariMasini_Back.Models.User", "User")
+                    b.HasOne("AplicatieVanzariMasini_Back.Models.User", null)
                         .WithMany("Photos")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }
