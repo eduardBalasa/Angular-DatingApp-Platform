@@ -23,6 +23,7 @@ namespace AplicatieVanzariMasini_Back.Helpers
                 src.DateOfBirth.CalculatorAge()));
             
             CreateMap<Photo, PhotoForDetailedDto>();
+            CreateMap<UserForUpdateDto, User>();
         }
     }
 }
