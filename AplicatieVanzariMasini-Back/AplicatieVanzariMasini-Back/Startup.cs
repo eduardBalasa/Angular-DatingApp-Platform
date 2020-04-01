@@ -55,6 +55,7 @@ namespace AplicatieVanzariMasini_Back
                         ValidateAudience = false
                     };
                 });
+            services.AddScoped<LogUserActivity>();
         }
         //
 

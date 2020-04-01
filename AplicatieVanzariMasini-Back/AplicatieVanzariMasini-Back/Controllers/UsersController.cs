@@ -1,5 +1,6 @@
 ﻿using AplicatieVanzariMasini_Back.Data;
 using AplicatieVanzariMasini_Back.Dtos;
+using AplicatieVanzariMasini_Back.Helpers;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace AplicatieVanzariMasini_Back.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]

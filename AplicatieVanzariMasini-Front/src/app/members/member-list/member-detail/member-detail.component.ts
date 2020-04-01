@@ -5,6 +5,7 @@ import { AlertifyService } from "src/app/_services/alertify.service";
 import { ActivatedRoute } from "@angular/router";
 import { error } from "protractor";
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 @Component({
   selector: "app-member-detail",
