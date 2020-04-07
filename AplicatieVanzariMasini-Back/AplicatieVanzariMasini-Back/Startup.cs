@@ -36,7 +36,10 @@ namespace AplicatieVanzariMasini_Back
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(x => {
+                x.UseLazyLoadingProxies();
+                x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                });
             services.AddCors();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(typeof(DatingRepository).Assembly);
@@ -85,6 +88,8 @@ namespace AplicatieVanzariMasini_Back
             app.UseAuthentication();
 
             app.UseHttpsRedirection();
+
+            app.UseDefaultFiles();
 
             app.UseRouting();
 
