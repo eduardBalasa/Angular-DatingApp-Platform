@@ -2,21 +2,22 @@
 
 namespace AplicatieVanzariMasini_Back.Migrations
 {
-    public partial class ExtendedUserClass1 : Migration
+    public partial class IsApproved : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Introduction",
-                table: "Users",
-                nullable: true);
+            migrationBuilder.AddColumn<bool>(
+                name: "IsApproved",
+                table: "Photos",
+                nullable: false,
+                defaultValue: false);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Introduction",
-                table: "Users");
+                name: "IsApproved",
+                table: "Photos");
         }
     }
 }

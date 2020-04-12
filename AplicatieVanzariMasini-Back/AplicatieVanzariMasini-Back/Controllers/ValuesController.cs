@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AplicatieVanzariMasini_Back.Data;
+using AplicatieVanzariMasini_Back.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AplicatieVanzariMasini_Back.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
@@ -20,36 +20,40 @@ namespace AplicatieVanzariMasini_Back.Controllers
         {
             _context = context;
         }
-        // GET: api/Values
-        [AllowAnonymous]
+
+        // GET api/values
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {
             var values = await _context.Values.ToListAsync();
+
             return Ok(values);
         }
-   
-        [AllowAnonymous]
-        [HttpGet("{id}", Name = "GetValues")]
-        public async Task<IActionResult> GetValues(int id)
+
+        // GET api/values/5
+        [Authorize(Roles = "Member")]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetValue(int id)
         {
             var value = await _context.Values.FirstOrDefaultAsync(x => x.Id == id);
+
             return Ok(value);
         }
 
-        // POST: api/Values
+        // POST api/values
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT: api/Values/5
+        // PUT api/values/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

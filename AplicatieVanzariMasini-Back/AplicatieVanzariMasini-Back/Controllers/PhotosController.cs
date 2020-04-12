@@ -16,7 +16,6 @@ using System.Threading.Tasks;
 
 namespace AplicatieVanzariMasini_Back.Controllers
 {
-    [Authorize]
     [Route("api/users/{userId}/photos")]
     [ApiController]
     public class PhotosController : ControllerBase
@@ -57,7 +56,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var userFromRepo = await _repo.GetUser(userId);
+            var userFromRepo = await _repo.GetUser(userId, true);
 
             var file = photoForCreationDto.File;
 
@@ -103,7 +102,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var user = await _repo.GetUser(userId);
+            var user = await _repo.GetUser(userId, true);
 
             if (!user.Photos.Any(p => p.Id == id))
                 return Unauthorized();
@@ -130,7 +129,7 @@ namespace AplicatieVanzariMasini_Back.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var user = await _repo.GetUser(userId);
+            var user = await _repo.GetUser(userId, true);
 
             if (!user.Photos.Any(p => p.Id == id))
                 return Unauthorized();
@@ -142,7 +141,6 @@ namespace AplicatieVanzariMasini_Back.Controllers
 
             if (photoFromRepo.PublicId != null)
             {
-
                 var deleteParams = new DeletionParams(photoFromRepo.PublicId);
 
                 var result = _cloudinary.Destroy(deleteParams);
@@ -163,6 +161,5 @@ namespace AplicatieVanzariMasini_Back.Controllers
 
             return BadRequest("Failed to delete the photo");
         }
-
     }
 }
